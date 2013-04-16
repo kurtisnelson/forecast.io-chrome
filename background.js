@@ -53,7 +53,8 @@ function updateLocation() {
 }
 
 function onAlarm(alarm) {
-        if(alarm && alarm.name == 'poll'){
+        if(alarm){
+                console.log("polling...");
                 poll();
         }
 }
