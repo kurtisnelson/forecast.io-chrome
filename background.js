@@ -35,8 +35,11 @@ function updateLocation() {
         }
 }
 
-updateLocation();
+function onAlarm(alarm) {
+        if(alarm && alarm.name == 'poll'){
+                poll();
+        }
+}
 poll();
-setInterval(function() {
-        poll();
-}, 300000);
+chrome.alarms.create("poll", {periodInMinutes: 8});
+chrome.alarms.onAlarm.addListener(onAlarm);
