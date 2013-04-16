@@ -11,8 +11,23 @@ function poll() {
         localStorage.currentSummary = weather.currently.summary;
         localStorage.currentIcon = weather.currently.icon;
         localStorage.currentTemp = weather.currently.temperature;
+
+        if (weather.hourly.data[0].precipProbability && weather.hourly.data[0].precipProbability > 0){
+                if(!localStorage.rainPossible)
+                        rainPossible();
+
+                localStorage.rainPossible = true;
+        }else{
+                localStorage.rainPossible = false;
+        }
+
         chrome.browserAction.setTitle({title: localStorage.currentSummary});
         chrome.browserAction.setIcon({path: chrome.extension.getURL('icons/' + localStorage.currentIcon + '.png')});
+}
+
+function rainPossible() {
+    var notification = webkitNotifications.createHTMLNotification('rain.html');
+    notification.show();
 }
 
 function apiGet() {

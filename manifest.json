@@ -6,7 +6,8 @@
         "permissions": [
           "https://api.forecast.io/",
           "alarms",
-          "geolocation"
+          "geolocation",
+          "notifications"
         ],
         "background": {
                 "scripts": ["background.js"],
