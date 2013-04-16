@@ -2,7 +2,7 @@ if (!localStorage.isInitialized){
         localStorage.apiKey = "7fd8d8d5e7bc267b3b33360200e3a27d";
         localStorage.latLong = "33.771406,-84.3853";
 }
-
+chrome.browserAction.setBadgeBackgroundColor({color: [0, 0, 255, 200]});
 function poll() {
         updateLocation();
         apiGet(); 
@@ -10,7 +10,7 @@ function poll() {
         var weather = JSON.parse(localStorage.resp);
         localStorage.currentSummary = weather.currently.summary;
         localStorage.currentIcon = weather.currently.icon;
-        localStorage.currentTemp = weather.currently.temperature;
+        localStorage.currentTemp = Math.floor(weather.currently.temperature);
 
         if (weather.hourly.data[0].precipProbability && weather.hourly.data[0].precipProbability > 0){
                 if(!localStorage.rainPossible)
@@ -22,7 +22,7 @@ function poll() {
         }
 
         chrome.browserAction.setTitle({title: localStorage.currentSummary});
-        chrome.browserAction.setIcon({path: chrome.extension.getURL('icons/' + localStorage.currentIcon + '.png')});
+        chrome.browserAction.setBadgeText({text: Math.floor(localStorage.currentTemp) + "°"});
 }
 
 function rainPossible() {

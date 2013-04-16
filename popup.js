@@ -8,9 +8,9 @@ skycons.play();
 document.getElementById("temp").innerHTML = localStorage.currentTemp + "&deg;";
 
 var weather = JSON.parse(localStorage.resp);
-var high = weather.daily.data[0].temperatureMax;
+var high = Math.floor(weather.daily.data[0].temperatureMax);
 document.getElementById("high").innerHTML = high + "&deg;";
-var low = weather.daily.data[0].temperatureMin;
+var low = Math.floor(weather.daily.data[0].temperatureMin);
 document.getElementById("low").innerHTML = low + "&deg;";
 var precipChance = 0;
 if (weather.daily.data[0].precipIntensity) {
