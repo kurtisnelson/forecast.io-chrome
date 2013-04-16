@@ -7,7 +7,7 @@ function poll() {
         updateLocation();
         apiGet(); 
         chrome.browserAction.setTitle({title: localStorage.currentSummary});
-        chrome.browserAction.setIcon({imageData: Skycons.CLEAR_DAY});
+        chrome.browserAction.setIcon({path: chrome.extension.getURL('icons/' + localStorage.currentIcon + '.png')});
 }
 
 function apiGet() {

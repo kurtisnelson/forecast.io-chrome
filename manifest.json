@@ -9,7 +9,7 @@
           "geolocation"
         ],
         "background": {
-                "scripts": ["background.js", "skycons.js"]
+                "scripts": ["background.js"]
                 //"persistent": false
         },
         "browser_action": {
