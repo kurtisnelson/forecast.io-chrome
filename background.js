@@ -17,6 +17,7 @@ function apiGet() {
                         var resp = JSON.parse(xhr.responseText);
                         localStorage.currentSummary = resp.currently.summary;
                         localStorage.currentIcon = resp.currently.icon;
+                        localStorage.currentTemp = resp.currently.temperature;
                 }
         }
         xhr.open("GET", "https://api.forecast.io/forecast/"+localStorage.apiKey+"/"+localStorage.latLong, true);
