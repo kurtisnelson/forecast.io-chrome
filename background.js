@@ -6,6 +6,11 @@ if (!localStorage.isInitialized){
 function poll() {
         updateLocation();
         apiGet(); 
+
+        var weather = JSON.parse(localStorage.resp);
+        localStorage.currentSummary = weather.currently.summary;
+        localStorage.currentIcon = weather.currently.icon;
+        localStorage.currentTemp = weather.currently.temperature;
         chrome.browserAction.setTitle({title: localStorage.currentSummary});
         chrome.browserAction.setIcon({path: chrome.extension.getURL('icons/' + localStorage.currentIcon + '.png')});
 }
@@ -14,10 +19,7 @@ function apiGet() {
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
                 if(xhr.readyState == 4) {
-                        var resp = JSON.parse(xhr.responseText);
-                        localStorage.currentSummary = resp.currently.summary;
-                        localStorage.currentIcon = resp.currently.icon;
-                        localStorage.currentTemp = resp.currently.temperature;
+                        localStorage.resp = xhr.responseText;
                 }
         }
         xhr.open("GET", "https://api.forecast.io/forecast/"+localStorage.apiKey+"/"+localStorage.latLong, true);
