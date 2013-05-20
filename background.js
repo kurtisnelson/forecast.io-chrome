@@ -1,6 +1,7 @@
 if (!localStorage.isInitialized){
         localStorage.apiKey = "7fd8d8d5e7bc267b3b33360200e3a27d";
         localStorage.latLong = "33.771406,-84.3853";
+        localStorage.currentIcon = "partly-cloudy-night";
 }
 chrome.browserAction.setBadgeBackgroundColor({color: [0, 0, 255, 200]});
 function poll() {
