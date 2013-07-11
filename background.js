@@ -22,6 +22,7 @@ function poll() {
                 localStorage.rainPossible = false;
         }
 
+        updateIcon();
         chrome.browserAction.setTitle({title: localStorage.currentSummary});
         chrome.browserAction.setBadgeText({text: Math.floor(localStorage.currentTemp) + "°"});
 }
@@ -53,12 +54,26 @@ function updateLocation() {
         }
 }
 
+function updateIcon() {
+    var canvas = document.createElement('canvas');
+    canvas.width = 19;
+    canvas.height = 19;
+    var skycons = new Skycons();
+    var iconName = localStorage.currentIcon.toUpperCase().replace(/-/g, '_');
+    skycons.set(canvas, Skycons[iconName]);
+    chrome.browserAction.setIcon({
+      imageData: canvas.getContext('2d').getImageData(0,0,19,19)
+    });
+}
+
 function onAlarm(alarm) {
         if(alarm){
                 console.log("polling...");
                 poll();
         }
 }
+
+updateIcon();
 poll();
 chrome.alarms.create("poll", {periodInMinutes: 8});
 chrome.alarms.onAlarm.addListener(onAlarm);
