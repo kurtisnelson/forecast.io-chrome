@@ -10,7 +10,7 @@
           "notifications"
         ],
         "background": {
-                "scripts": ["background.js"],
+                "scripts": ["skycons.js", "background.js"],
                 "persistent": false
         },
         "browser_action": {
